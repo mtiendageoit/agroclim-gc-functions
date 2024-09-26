@@ -7,31 +7,32 @@ on:
 
 jobs:
   deploy:
+    name: Deploy Functions
     runs-on: ubuntu-latest
 
     steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-        - name: Cloud Functions Deploy
-          uses: google-github-actions/deploy-cloud-functions@v0.1.2
-          with:
-            credentials: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}  
-            project_id: ${{ secrets.GCP_PROJECT_ID }}  
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-        # Deploy all functions
-        - name: Deploy image-dates function
-          run: |
-            gcloud functions deploy image-dates \
-              --no-allow-unauthenticated \
-              --entry-point=handler \
-              --runtime=python312 \
-              --trigger-http \
-              --source=image-dates \
-              --region=us-south1 \
-              --gen2 \
-              --memory=256MB \
-              --timeout=60s \
-              --max-instances=2 \
-              --min-instances=0 \
-              --concurrency=1
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        credentials: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
 
+    - name: Deploy image-dates function
+      run: |
+        gcloud functions deploy image-dates \
+          --no-allow-unauthenticated \
+          --entry-point=handler \
+          --runtime=python312 \
+          --trigger-http \
+          --source=image-dates \
+          --region=us-south1 \
+          --gen2 \
+          --memory=256MB \
+          --timeout=60s \
+          --max-instances=2 \
+          --min-instances=0 \
+          --concurrency=1
