@@ -8,9 +8,3 @@ __pycache__/
 .env
 venv
 env
-
-# Google Cloud credentials or service account keys (if stored locally)
-*.json
-
-# Google Cloud Functions generated files
-.gc_function/

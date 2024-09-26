@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "image-dates",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "functions_framework",
+      "console": "integratedTerminal",
+      "args": [
+        "--target=handler",
+        "--port=8081",
+        "--source=image-dates/main.py"
+      ],
+      "autoReload": {
+        "enable": true,
+        "include": [
+          "**/*.py"
+        ]
+      }
+    }
+  ]
+}
