@@ -1,0 +1,40 @@
+name: Deploy Functions to Google Cloud
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy Functions
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the code from the repo
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Set up Google Cloud SDK
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+        export_default_credentials: true
+
+    # Deploy all functions
+    - name: Deploy image-dates function
+      run: |
+        gcloud functions deploy image-dates \
+          --entry-point=handler \
+          --runtime=python312 \
+          --trigger-http \
+          --source=image-dates \
+          --region=us-south1 \
+          --gen2 \
+          --memory=256MB \
+          --timeout=60s \
+          --maxInstanceCount=2 \
+          --maxInstanceRequestConcurrency=1
+
