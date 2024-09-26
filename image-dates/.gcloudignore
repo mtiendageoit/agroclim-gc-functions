@@ -8,4 +8,4 @@ venv
 .gcloudignore
 README.md
 
-.ipynb
+*.ipynb
