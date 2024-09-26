@@ -1,0 +1,11 @@
+__pycache__
+.vscode
+.git/
+venv
+.env
+
+.cloudignore
+.gcloudignore
+README.md
+
+image_dates.ipynb

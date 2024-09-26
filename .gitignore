@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore Python environment settings
+*.env
+.env
+venv
+env
+
+# Google Cloud credentials or service account keys (if stored locally)
+*.json
+
+# Google Cloud Functions generated files
+.gc_function/
