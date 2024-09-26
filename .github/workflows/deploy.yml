@@ -27,6 +27,7 @@ jobs:
     - name: Deploy image-dates function
       run: |
         gcloud functions deploy image-dates \
+          --no-allow-unauthenticated \
           --entry-point=handler \
           --runtime=python312 \
           --trigger-http \
@@ -35,6 +36,7 @@ jobs:
           --gen2 \
           --memory=256MB \
           --timeout=60s \
-          --maxInstanceCount=2 \
-          --maxInstanceRequestConcurrency=1
+          --max-instances=2 \
+          --min-instances=0 \
+          --concurrency=1
 
