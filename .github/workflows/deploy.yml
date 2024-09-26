@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v2
+        - name: Checkout code
+          uses: actions/checkout@v2
         - name: Cloud Functions Deploy
           uses: google-github-actions/deploy-cloud-functions@v0.1.2
           with:
