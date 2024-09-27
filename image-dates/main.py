@@ -27,6 +27,6 @@ def handler(request):
 
 
 def get_info(image):
-  date = ee.Date(image.get('system:time_start')).format('dd/MM/yyyy')
+  date = ee.Date(image.get('system:time_start')).format('yyyy/MM/dd')
   cloudy = ee.Number(image.get('CLOUDY_PIXEL_PERCENTAGE'))
   return {'date': date, 'cloudy': cloudy.format('%.0f')}
